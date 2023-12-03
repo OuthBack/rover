@@ -79,4 +79,64 @@ describe('Rover', () => {
             expect(position).toEqual([3, 2]);
         });
     });
+
+    describe('should rotate', () => {
+        beforeEach(() => {
+            rover = new Rover(new Plateau(5, 5)).setPosition(3, 3);
+        });
+        describe('to right', () => {
+            const rotationDirection = 'R';
+            it('from N', () => {
+                rover.setDirection('N').rotate(rotationDirection);
+                const direction = rover.getDirection();
+
+                expect(direction).toBe('E');
+            });
+            it('from E', () => {
+                rover.setDirection('E').rotate(rotationDirection);
+                const direction = rover.getDirection();
+
+                expect(direction).toBe('S');
+            });
+            it('from S', () => {
+                rover.setDirection('S').rotate(rotationDirection);
+                const direction = rover.getDirection();
+
+                expect(direction).toBe('W');
+            });
+            it('from W', () => {
+                rover.setDirection('W').rotate(rotationDirection);
+                const direction = rover.getDirection();
+
+                expect(direction).toBe('N');
+            });
+        });
+        describe('to left', () => {
+            const rotationDirection = 'L';
+            it('from N', () => {
+                rover.setDirection('N').rotate(rotationDirection);
+                const direction = rover.getDirection();
+
+                expect(direction).toBe('W');
+            });
+            it('from W', () => {
+                rover.setDirection('W').rotate(rotationDirection);
+                const direction = rover.getDirection();
+
+                expect(direction).toBe('S');
+            });
+            it('from S', () => {
+                rover.setDirection('S').rotate(rotationDirection);
+                const direction = rover.getDirection();
+
+                expect(direction).toBe('E');
+            });
+            it('from E', () => {
+                rover.setDirection('E').rotate(rotationDirection);
+                const direction = rover.getDirection();
+
+                expect(direction).toBe('N');
+            });
+        });
+    });
 });

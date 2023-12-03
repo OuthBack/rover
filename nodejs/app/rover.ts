@@ -2,6 +2,7 @@ import { NullPositionError } from './errors/rover.error';
 import { Plateau } from './plateau';
 
 type Direction = 'N' | 'E' | 'W' | 'S';
+type Rotation = 'L' | 'R';
 
 export class Rover {
     private plateou: Plateau;
@@ -22,6 +23,10 @@ export class Rover {
         }
 
         return this.position;
+    }
+
+    getDirection(): Direction {
+        return this.direction;
     }
 
     setDirection(direction: Direction): Rover {
@@ -52,6 +57,36 @@ export class Rover {
                 break;
             case 'S':
                 this.setPosition(width, height - 1);
+                break;
+        }
+
+        return this;
+    }
+
+    rotate(rotation: Rotation): Rover {
+        // Estou fazendo dessa forma percorrendo um array ao invés de pegar em
+        // um HashMap porque é mais fácil de acrescentar itens no Array
+        // assim ficando mais fácil a manutenção
+        const directions: Direction[] = ['N', 'E', 'S', 'W'];
+
+        function getNextDirection(directionsArray: Direction[]) {
+            for (const i in directionsArray) {
+                const direction = directions[i];
+                if (direction === this.direction) {
+                    if (parseInt(i) + 1 >= directionsArray.length) {
+                        this.setDirection(directionsArray[0]);
+                    }
+                }
+            }
+        }
+
+        switch (rotation) {
+            case 'R':
+                getNextDirection(directions);
+                break;
+            case 'L':
+                const directionsLeft = directions.reverse();
+                getNextDirection(directionsLeft);
                 break;
         }
 
