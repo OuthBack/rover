@@ -7,5 +7,6 @@ COPY . .
 RUN npm i -g pnpm
 RUN pnpm i
 
-CMD ["pnpm", "start < input.txt"]
+RUN chmod +x entrypoint.sh
+ENTRYPOINT ["/app/entrypoint.sh"]
 
