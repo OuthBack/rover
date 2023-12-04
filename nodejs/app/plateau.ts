@@ -1,4 +1,7 @@
-import { OutOfPlateauError } from './errors/plateau.error';
+import {
+    AnotherRoverAtPositionError,
+    OutOfPlateauError,
+} from './errors/plateau.error';
 
 export class Plateau {
     private matrix: number[][];
@@ -13,7 +16,7 @@ export class Plateau {
         // Por que?
         // Para já limitar o tamanho do plateau
         for (let i = 0; i <= height; i++) {
-            this.matrix[i] = new Array(width).fill(0);
+            this.matrix[i] = new Array(width + 1).fill(0);
         }
     }
 
@@ -33,10 +36,10 @@ export class Plateau {
             height >= this.matrix.length ||
             height < 0
         ) {
-            return false;
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     getMatrix(): number[][] {
@@ -44,18 +47,32 @@ export class Plateau {
     }
 
     getElement(width: number, height: number): number {
-        if (!this.isOutOfPlateau(width, height)) {
+        if (this.isOutOfPlateau(width, height)) {
             throw new OutOfPlateauError();
         }
 
         return this.matrix[this.convertHeight(height)][width];
     }
 
-    setRoverAt(width: number, height: number): void {
-        if (!this.isOutOfPlateau(width, height)) {
+    setRoverAt(width: number, height: number): Plateau {
+        if (this.isOutOfPlateau(width, height)) {
             throw new OutOfPlateauError();
         }
 
+        if (this.getElement(width, height) === 1) {
+            throw new AnotherRoverAtPositionError(width, height);
+        }
+
         this.matrix[this.convertHeight(height)][width] = 1;
+        return this;
+    }
+
+    removeRoverAt(width: number, height: number): Plateau {
+        if (this.isOutOfPlateau(width, height)) {
+            throw new OutOfPlateauError();
+        }
+
+        this.matrix[this.convertHeight(height)][width] = 0;
+        return this;
     }
 }

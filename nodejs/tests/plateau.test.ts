@@ -1,20 +1,21 @@
-import { OutOfPlateauError } from '../app/errors/plateau.error';
+import {
+    AnotherRoverAtPositionError,
+    OutOfPlateauError,
+} from '../app/errors/plateau.error';
 import { Plateau } from '../app/plateau';
 
 describe('Plateau', () => {
-    beforeEach(() => {});
-
     it('should create a matrix 6x6', () => {
         const plateau = new Plateau(5, 5);
         const matrix = plateau.getMatrix();
 
         expect(matrix).toEqual([
-            [0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
         ]);
     });
 
@@ -67,29 +68,43 @@ describe('Plateau', () => {
             expect(element).toBe(1);
         });
 
-        describe('SetRoverAt - Out of bound', () => {
-            it('[-1, -1]', () => {
-                try {
-                    plateau.setRoverAt(-1, -1);
-                } catch (e) {
-                    expect(e).toBeInstanceOf(OutOfPlateauError);
-                }
+        describe('SetRoverAt', () => {
+            beforeEach(() => {
+                plateau = new Plateau(5, 5);
             });
 
-            it('[6, 6]', () => {
-                try {
-                    plateau.setRoverAt(6, 6);
-                } catch (e) {
-                    expect(e).toBeInstanceOf(OutOfPlateauError);
-                }
+            describe('Out of bound', () => {
+                it('[-1, -1]', () => {
+                    try {
+                        plateau.setRoverAt(-1, -1);
+                    } catch (e) {
+                        expect(e).toBeInstanceOf(OutOfPlateauError);
+                    }
+                });
+
+                it('[6, 6]', () => {
+                    try {
+                        plateau.setRoverAt(6, 6);
+                    } catch (e) {
+                        expect(e).toBeInstanceOf(OutOfPlateauError);
+                    }
+                });
+
+                it('[10, 10]', () => {
+                    try {
+                        plateau.setRoverAt(10, 10);
+                    } catch (e) {
+                        expect(e).toBeInstanceOf(OutOfPlateauError);
+                    }
+                });
             });
 
-            it('[10, 10]', () => {
-                try {
-                    plateau.setRoverAt(10, 10);
-                } catch (e) {
-                    expect(e).toBeInstanceOf(OutOfPlateauError);
-                }
+            it('Has another rover at the position', () => {
+                plateau.setRoverAt(1, 1);
+
+                const errorFunction = () => plateau.setRoverAt(1, 1);
+
+                expect(errorFunction).toThrow(AnotherRoverAtPositionError);
             });
         });
 
@@ -118,6 +133,14 @@ describe('Plateau', () => {
                 }
             });
         });
+    });
+
+    it('should remove rover at', () => {
+        const plateau = new Plateau(5, 5).setRoverAt(1, 1);
+        plateau.removeRoverAt(1, 1);
+        const element = plateau.getElement(1, 1);
+
+        expect(element).toBe(0);
     });
 
     it('should set at [0, 0] and NOT get at [0,1]', () => {

@@ -1,9 +1,13 @@
-import { OutOfPlateauError } from '../app/errors/plateau.error';
+import {
+    AnotherRoverAtPositionError,
+    OutOfPlateauError,
+} from '../app/errors/plateau.error';
 import { Plateau } from '../app/plateau';
 import { Rover } from '../app/rover';
 
 describe('Rover', () => {
     let rover: Rover;
+    let plateau: Plateau;
 
     describe('should set position at', () => {
         beforeEach(() => {
@@ -32,26 +36,23 @@ describe('Rover', () => {
         describe('Out of Plateau', () => {
             it('[-1, -1]', () => {
                 const pos = [-1, -1];
-                try {
+                const errorFunction = () =>
                     rover.setPosition(pos[0], pos[1]).getPosition();
-                } catch (e) {
-                    expect(e).toBeInstanceOf(OutOfPlateauError);
-                }
+                expect(errorFunction).toThrow(OutOfPlateauError);
             });
             it('[6, 6]', () => {
                 const pos = [6, 6];
-                try {
+                const errorFunction = () =>
                     rover.setPosition(pos[0], pos[1]).getPosition();
-                } catch (e) {
-                    expect(e).toBeInstanceOf(OutOfPlateauError);
-                }
+                expect(errorFunction).toThrow(OutOfPlateauError);
             });
         });
     });
 
     describe('should move forward', () => {
         beforeEach(() => {
-            rover = new Rover(new Plateau(5, 5)).setPosition(3, 3);
+            plateau = new Plateau(5, 5);
+            rover = new Rover(plateau).setPosition(3, 3);
         });
 
         it('to N', () => {
@@ -78,6 +79,23 @@ describe('Rover', () => {
             const position = rover.getPosition();
             expect(position).toEqual([3, 2]);
         });
+
+        it('and check if previus position was reseted', () => {
+            const pos = [1, 1];
+            rover.setPosition(pos[0], pos[1]).moveForward();
+            const element = plateau.getElement(pos[0], pos[1]);
+
+            expect(element).toBe(0);
+        });
+
+        it('Has another rover at the position', () => {
+            rover.setPosition(1, 1);
+            const newRover = new Rover(plateau).setPosition(1, 0);
+
+            const errorFunction = () => newRover.moveForward();
+
+            expect(errorFunction).toThrow(AnotherRoverAtPositionError);
+        });
     });
 
     describe('should rotate', () => {
@@ -87,26 +105,34 @@ describe('Rover', () => {
         describe('to right', () => {
             const rotationDirection = 'R';
             it('from N', () => {
-                rover.setDirection('N').rotate(rotationDirection);
-                const direction = rover.getDirection();
+                const direction = rover
+                    .setDirection('N')
+                    .rotate(rotationDirection)
+                    .getDirection();
 
                 expect(direction).toBe('E');
             });
             it('from E', () => {
-                rover.setDirection('E').rotate(rotationDirection);
-                const direction = rover.getDirection();
+                const direction = rover
+                    .setDirection('E')
+                    .rotate(rotationDirection)
+                    .getDirection();
 
                 expect(direction).toBe('S');
             });
             it('from S', () => {
-                rover.setDirection('S').rotate(rotationDirection);
-                const direction = rover.getDirection();
+                const direction = rover
+                    .setDirection('S')
+                    .rotate(rotationDirection)
+                    .getDirection();
 
                 expect(direction).toBe('W');
             });
             it('from W', () => {
-                rover.setDirection('W').rotate(rotationDirection);
-                const direction = rover.getDirection();
+                const direction = rover
+                    .setDirection('W')
+                    .rotate(rotationDirection)
+                    .getDirection();
 
                 expect(direction).toBe('N');
             });
@@ -114,28 +140,63 @@ describe('Rover', () => {
         describe('to left', () => {
             const rotationDirection = 'L';
             it('from N', () => {
-                rover.setDirection('N').rotate(rotationDirection);
-                const direction = rover.getDirection();
+                const direction = rover
+                    .setDirection('N')
+                    .rotate(rotationDirection)
+                    .getDirection();
 
                 expect(direction).toBe('W');
             });
             it('from W', () => {
-                rover.setDirection('W').rotate(rotationDirection);
-                const direction = rover.getDirection();
+                const direction = rover
+                    .setDirection('W')
+                    .rotate(rotationDirection)
+                    .getDirection();
 
                 expect(direction).toBe('S');
             });
             it('from S', () => {
-                rover.setDirection('S').rotate(rotationDirection);
-                const direction = rover.getDirection();
+                const direction = rover
+                    .setDirection('S')
+                    .rotate(rotationDirection)
+                    .getDirection();
 
                 expect(direction).toBe('E');
             });
             it('from E', () => {
-                rover.setDirection('E').rotate(rotationDirection);
-                const direction = rover.getDirection();
+                const direction = rover
+                    .setDirection('E')
+                    .rotate(rotationDirection)
+                    .getDirection();
 
                 expect(direction).toBe('N');
+            });
+        });
+    });
+
+    describe('should run command', () => {
+        beforeEach(() => {
+            rover = new Rover(new Plateau(5, 5))
+                .setPosition(0, 0)
+                .setDirection('N');
+        });
+
+        it('move forward', () => {
+            const position = rover.command('M').getPosition();
+
+            expect(position).toEqual([0, 1]);
+        });
+
+        describe('rotate', () => {
+            it('right', () => {
+                const direction = rover.command('R').getDirection();
+
+                expect(direction).toBe('E');
+            });
+            it('left', () => {
+                const direction = rover.command('L').getDirection();
+
+                expect(direction).toBe('W');
             });
         });
     });
