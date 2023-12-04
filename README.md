@@ -61,7 +61,11 @@
 
 ## 📖 About the project
 
-The project is a CRUD + Frontend of vehicles.
+The project is a navigation for a rover.
+
+### Poruguese Observations
+
+No código há comentários para ajudar quem está avalidando o código.
 
 ### 🔋 Built with:
 
@@ -77,7 +81,7 @@ To run the project it is just:
 
 ### :warning: Requirements
 
-- Node.js >= 20.10.0
+- Docker
 
 ### :gear: Installation
 
@@ -85,10 +89,17 @@ To run the project it is just:
 ```sh
 cd nodejs
 ```
-2. Run the command
+2. Run docker build
 ```sh
-pnpm start < input.txt
+docker build -t rover .
 ```
+
+3. Run docker run
+```sh
+docker run rover
+```
+
+4. To change the input you just need to change the file "input.txt"
 
 <!-- [![Product Name Screen Shot][product-screenshot]](https://vehicles-front.vercel.app) -->
 
