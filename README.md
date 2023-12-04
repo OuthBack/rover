@@ -113,7 +113,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Henrique Figueiredo - riquessan@gmail.com
 
-Project Link: [https://github.com/OuthBack/vehicles-app](https://github.com/OuthBack/vehicles-app)
+Project Link: [https://github.com/OuthBack/vehicles-app](https://github.com/OuthBack/rover)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
