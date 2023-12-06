@@ -1,0 +1,8 @@
+AllCops:
+  TargetRubyVersion: 3.X
+Layout/IndentationWidth:
+  Width: 4
+Naming/MethodName:
+  EnforcedStyle: "camelCase"
+Naming/VariableName:
+  EnforcedStyle: "camelCase"

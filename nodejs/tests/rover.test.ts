@@ -80,7 +80,7 @@ describe('Rover', () => {
             expect(position).toEqual([3, 2]);
         });
 
-        it('and check if previus position was reseted', () => {
+        it('and check reset previous position', () => {
             const pos = [1, 1];
             rover.setPosition(pos[0], pos[1]).moveForward();
             const element = plateau.getElement(pos[0], pos[1]);

@@ -95,7 +95,7 @@ export class Rover {
             // continuar
             this.setDirection(directionsArray[0]);
             for (const i in directionsArray) {
-                const direction = directions[i];
+                const direction = directionsArray[i];
                 const next = directionsArray[parseInt(i) + 1];
 
                 if (direction === thisDirection && next) {

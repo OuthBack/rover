@@ -73,29 +73,20 @@ describe('Plateau', () => {
                 plateau = new Plateau(5, 5);
             });
 
-            describe('Out of bound', () => {
+            describe('Out of plateau', () => {
                 it('[-1, -1]', () => {
-                    try {
-                        plateau.setRoverAt(-1, -1);
-                    } catch (e) {
-                        expect(e).toBeInstanceOf(OutOfPlateauError);
-                    }
+                    const errorFunction = () => plateau.setRoverAt(-1, -1);
+                    expect(errorFunction).toThrow(OutOfPlateauError);
                 });
 
                 it('[6, 6]', () => {
-                    try {
-                        plateau.setRoverAt(6, 6);
-                    } catch (e) {
-                        expect(e).toBeInstanceOf(OutOfPlateauError);
-                    }
+                    const errorFunction = () => plateau.setRoverAt(6, 6);
+                    expect(errorFunction).toThrow(OutOfPlateauError);
                 });
 
                 it('[10, 10]', () => {
-                    try {
-                        plateau.setRoverAt(10, 10);
-                    } catch (e) {
-                        expect(e).toBeInstanceOf(OutOfPlateauError);
-                    }
+                    const errorFunction = () => plateau.setRoverAt(10, 10);
+                    expect(errorFunction).toThrow(OutOfPlateauError);
                 });
             });
 
@@ -110,32 +101,23 @@ describe('Plateau', () => {
 
         describe('GetElement - Out of bound', () => {
             it('[-1, -1]', () => {
-                try {
-                    plateau.getElement(-1, -1);
-                } catch (e) {
-                    expect(e).toBeInstanceOf(OutOfPlateauError);
-                }
+                const errorFunction = () => plateau.getElement(-1, -1);
+                expect(errorFunction).toThrow(OutOfPlateauError);
             });
 
             it('[6, 6]', () => {
-                try {
-                    plateau.getElement(6, 6);
-                } catch (e) {
-                    expect(e).toBeInstanceOf(OutOfPlateauError);
-                }
+                const errorFunction = () => plateau.getElement(6, 6);
+                expect(errorFunction).toThrow(OutOfPlateauError);
             });
 
             it('[10, 10]', () => {
-                try {
-                    plateau.getElement(10, 10);
-                } catch (e) {
-                    expect(e).toBeInstanceOf(OutOfPlateauError);
-                }
+                const errorFunction = () => plateau.getElement(10, 10);
+                expect(errorFunction).toThrow(OutOfPlateauError);
             });
         });
     });
 
-    it('should remove rover at', () => {
+    it('should remove rover at [1, 1]', () => {
         const plateau = new Plateau(5, 5).setRoverAt(1, 1);
         plateau.removeRoverAt(1, 1);
         const element = plateau.getElement(1, 1);
