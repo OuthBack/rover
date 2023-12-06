@@ -48,10 +48,9 @@
       <ul>
         <li><a href="#prerequisites">Requirements</a></li>
         <li><a href="#installation">Instalation</a></li>
-        <li><a href="#props">Instalation</a></li>
       </ul>
     </li>
-    <li><a href="#license">Licence</a></li>
+    <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
 
   </ol>
@@ -63,7 +62,7 @@
 
 The project is a navigation for a rover.
 
-### Poruguese Observations
+### Portuguese Observations
 
 No código há comentários para ajudar quem está avalidando o código.
 
@@ -85,10 +84,15 @@ To run the project it is just:
 
 ### :gear: Installation
 
-1. Choose your app in vehicles crud
+1. Choose your language
 ```sh
 cd nodejs
 ```
+or
+```sh
+cd ruby
+```
+
 2. Run docker build
 ```sh
 docker build -t rover .
@@ -101,9 +105,7 @@ docker run rover
 
 4. To change the input you just need to change the file "input.txt"
 
-<!-- [![Product Name Screen Shot][product-screenshot]](https://vehicles-front.vercel.app) -->
-
-## :pencil: Licence
+## :pencil: License
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
@@ -113,22 +115,22 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Henrique Figueiredo - riquessan@gmail.com
 
-Project Link: [https://github.com/OuthBack/vehicles-app](https://github.com/OuthBack/rover)
+Project Link: [https://github.com/OuthBack/rover](https://github.com/OuthBack/rover)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[contributors-shield]: https://img.shields.io/github/OuthBack/vehicles-app/Best-README-Template.svg?style=for-the-badge
-[contributors-url]: https://github.com/OuthBack/vehicles-app/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/OuthBack/vehicles-app.svg?style=for-the-badge
-[forks-url]: https://github.com/OuthBack/vehicles-app/network/members
-[stars-shield]: https://img.shields.io/github/stars/OuthBack/vehicles-app.svg?style=for-the-badge
-[stars-url]: https://github.com/OuthBack/vehicles-app/stargazers
-[issues-shield]: https://img.shields.io/github/issues/OuthBack/vehicles-app.svg?style=for-the-badge
-[issues-url]: https://github.com/OuthBack/vehicles-app/issues
-[license-shield]: https://img.shields.io/github/license/OuthBack/vehicles-app.svg?style=for-the-badge
-[license-url]: https://github.com/OuthBack/vehicles-app/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/OuthBack/rover/Best-README-Template.svg?style=for-the-badge
+[contributors-url]: https://github.com/OuthBack/rover/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/OuthBack/rover.svg?style=for-the-badge
+[forks-url]: https://github.com/OuthBack/rover/network/members
+[stars-shield]: https://img.shields.io/github/stars/OuthBack/rover.svg?style=for-the-badge
+[stars-url]: https://github.com/OuthBack/rover/stargazers
+[issues-shield]: https://img.shields.io/github/issues/OuthBack/rover.svg?style=for-the-badge
+[issues-url]: https://github.com/OuthBack/rover/issues
+[license-shield]: https://img.shields.io/github/license/OuthBack/rover.svg?style=for-the-badge
+[license-url]: https://github.com/OuthBack/rover/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/h-figueiredo
 [product-screenshot]: .github/screenshot.png
-[site-status]: https://img.shields.io/website/https/vercel.com/outhback/vehicles-app/path/to/page.html.svg.?style=for-the-badge
+[site-status]: https://img.shields.io/website/https/vercel.com/outhback/rover/path/to/page.html.svg.?style=for-the-badge
